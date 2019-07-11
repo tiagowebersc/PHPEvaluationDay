@@ -1,4 +1,5 @@
 create database real_state;
+use real_state;
 
 create table typeHousing (
   id_type int(10) primary key not null auto_increment,
@@ -13,9 +14,11 @@ create table housing (
  pc varchar(4) not null,
  area float(6,2) not null,
  price float(10,2) not null,
- photo varchar(200) not null,
+ photo varchar(200),
  id_type int(10) not null,
- description varchar(500) not null,
+ description varchar(500),
  CONSTRAINT fk_id_type Foreign Key(id_type) REFERENCES typeHousing(id_type)
 )ENGINE=INNODB;
 
+INSERT INTO typeHousing (description) VALUES ('sale');
+INSERT INTO typeHousing (description) VALUES ('letting');

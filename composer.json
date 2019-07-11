@@ -1,0 +1,12 @@
+{
+    "name": "numericall/php-evaluation-day",
+    "authors": [
+        {
+            "name": "Tiago",
+            "email": "tiagowebersc@gmail.com"
+        }
+    ],
+    "require": {
+        "sirprize/postal-code-validator": "^1.3"
+    }
+}
