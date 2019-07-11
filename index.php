@@ -47,6 +47,8 @@
         }
         mysqli_close($conn);
         ?>
+        <a href="housing.php">Add housing</a>
+
     </section>
 </body>
 

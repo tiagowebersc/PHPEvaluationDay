@@ -11,6 +11,10 @@
 
 <body>
     <?php
+    require_once __DIR__ . '/vendor/autoload.php';
+
+    use Sirprize\PostalCodeValidator\Validator;
+
     require_once 'database.php';
     $title = "";
     $address = "";
@@ -23,6 +27,7 @@
     $description = "";
     $error = "";
     $stored = false;
+
     if (isset($_POST['addHousingSubmit'])) {
         // get all the values
         $title = trim(htmlspecialchars($_POST['title']));
@@ -34,11 +39,13 @@
         $type = trim(htmlspecialchars($_POST['type']));
         $description = trim(htmlspecialchars($_POST['description']));
         // validate all mandatory fields
+        $validator = new Validator();
         if (empty($title)) $error = "Title must be informed!";
         else if (empty($address)) $error = "Address must be informed!";
         else if (empty($city)) $error = "City must be informed!";
         else if (empty($pc)) $error = "Postcode must be informed!";
         else if (strlen($pc) !== 4) $error = "Format incorrect of postcode!";
+        else if (!$validator->isValid('LU', $pc)) $error = "Postcode not exist!";
         else if (empty($area)) $error = "Surface area must be informed!";
         else if (!is_integer($area)) $error = "Surface area must be a number!";
         else if (empty($price)) $error = "Price must be informed!";
@@ -101,6 +108,7 @@
     } else {
         ?>
         <form class="elementCenter width22" enctype="multipart/form-data" action="" method="post">
+            <a href="index.php">List of housing</a>
             <label for="title">Title:</label>
             <input type="text" name="title" id="title" placeholder="Enter the title" value="<?php echo $title; ?>">
             <label for="address">Address:</label>
